@@ -3,6 +3,10 @@ var router=express.Router();
 var passport=require("passport");
 var User=require("../models/user");
 router.get('/',function(req,res){
+    // console.log(req.user==undefined);
+    if(req.user) console.log(req.user.email);
+
+
     res.render('landing');
 });
 // ==============================================
@@ -15,7 +19,7 @@ router.get("/register",function(req,res){
     res.render("register");
 });
 router.post("/register",function(req,res){
-    var newUser=new User({username:req.body.username});
+    var newUser=new User({username:req.body.username ,email:req.body.email});
     User.register(newUser,req.body.password,function(err,user){
         if(err){
             console.log(err);

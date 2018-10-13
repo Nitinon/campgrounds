@@ -17,6 +17,7 @@
                     <h4 class="pull-right">$99.00</h4>
                     <h3><a><%=campground.name%></a></h3>   
                     <p><%=campground.description%></p>
+                    <em>Submitted By <%=campground.author.username%></em>
                 </div>
             </div>
             <div class="well">
@@ -28,7 +29,7 @@
                     
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                <strong><%=comment.author%></strong>
+                                <strong><%=comment.author.username%></strong>
                             <span class="pull-right">10 days ago</span>
                                 <p><%=comment.text%></p>
                         </div>

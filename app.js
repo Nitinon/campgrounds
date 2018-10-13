@@ -10,15 +10,16 @@ var express=require('express'),
     seedDB=require("./seeds");
 
 var commentRoutes=require("./routes/comments"),
-    campgroundRoutes=require("./routes/campgrounds"),
-    indexRoutes=require("./routes/index");
+    indexRoutes=require("./routes/index"),
+    campgroundRoutes=require("./routes/campgrounds");
 
     mongoose.connect('mongodb://localhost/yelp_camp');
     app.use(bodyParser.urlencoded({extended:true}));
     app.set('view engine','ejs');
     app.use(express.static(__dirname+"/public"));
     console.log(__dirname);
-    seedDB();
+    // comment seedDB
+    // seedDB();
 
     
     app.use(require("express-session")({
@@ -37,9 +38,10 @@ var commentRoutes=require("./routes/comments"),
         res.locals.currentUser=req.user;
         next();
     });
-    app.use(commentRoutes);
-    app.use(campgroundRoutes);
     app.use(indexRoutes);
+    app.use("/campgrounds",campgroundRoutes);
+    // :id มันส่ง params มาไม่ได้เลยต้อง mergeParams
+    app.use("/campgrounds/:id/comments",commentRoutes);
     
     
     

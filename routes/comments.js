@@ -1,9 +1,10 @@
 var express=require("express");
-var router=express.Router();
+// ต้อง merge params
+var router=express.Router({mergeParams:true});
 var Campground=require("../models/campground");
 var Comment=require("../models/comment");
 
-router.get("/campgrounds/:id/comments/new",isLoggedIn,function(req,res){
+router.get("/new",isLoggedIn,function(req,res){
     Campground.findById(req.params.id,function(err,campground){
         if(err){
             console.log(err);
@@ -12,22 +13,31 @@ router.get("/campgrounds/:id/comments/new",isLoggedIn,function(req,res){
         }
     });
 });
-router.post("/campgrounds/:id/comments",function(req,res){
+router.post("/",function(req,res){
     Campground.findById(req.params.id,function(err,campground){
         if(err){
             console.log(err);
         }else{
+            // create คือสร้้างใหม่ save คือ update อันเดิม
             Comment.create(req.body.comment,function(err,comment){
                 if(err){
                     console.log(err);
                 }else{
+                    comment.author.id=req.user._id;
+                    comment.author.username=req.user.username;
+                    console.log("New Commment By "+req.user.username);
+                    // save comment 
+                    comment.save();
+                    // มันยัด comment เข้า campground
                     campground.comments.push(comment);
                     campground.save();
+                    
+                    console.log(comment);
                     res.redirect("/campgrounds/"+campground._id);
 
                 }
             });
-            console.log(req.body.campground)
+            // console.log(req.body.campground)
         }
     });
 });
