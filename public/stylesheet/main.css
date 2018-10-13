@@ -3,7 +3,11 @@
 }
 .thumbnail {
     padding: 0;
+    padding-bottom: 10px;
 }
 .thumbnail .caption-full{
     padding-left: 9px;
+}
+#del-form{
+    display: inline;
 }

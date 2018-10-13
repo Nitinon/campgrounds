@@ -4,6 +4,7 @@ var express=require('express'),
     mongoose=require('mongoose'),
     passport=require("passport"),
     LocalStrategy=require("passport-local"),
+    methodOverride=require("method-override"),
     Campground=require("./models/campground"),
     User=require("./models/user")
     Comment=require("./models/comment"),
@@ -13,10 +14,12 @@ var commentRoutes=require("./routes/comments"),
     indexRoutes=require("./routes/index"),
     campgroundRoutes=require("./routes/campgrounds");
 
-    mongoose.connect('mongodb://localhost/yelp_camp');
-    app.use(bodyParser.urlencoded({extended:true}));
-    app.set('view engine','ejs');
-    app.use(express.static(__dirname+"/public"));
+mongoose.connect('mongodb://localhost/yelp_camp');
+app.use(bodyParser.urlencoded({extended:true}));
+app.set('view engine','ejs');
+app.use(express.static(__dirname+"/public"));
+app.use(methodOverride("_method"));
+
     console.log(__dirname);
     // comment seedDB
     // seedDB();
