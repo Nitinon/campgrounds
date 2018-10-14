@@ -46,55 +46,6 @@ app.use(methodOverride("_method"));
     // :id มันส่ง params มาไม่ได้เลยต้อง mergeParams
     app.use("/campgrounds/:id/comments",commentRoutes);
     
-    
-    
-
-
-    // app.get('/',function(req,res){
-    //     res.render('landing');
-    // });
-    // // ==============================================
-    // // Comment Route
-    // // ==============================================
-    
-    
-    // // autheniticate route
-    // app.get("/register",function(req,res){
-    //     res.render("register");
-    // });
-    // app.post("/register",function(req,res){
-    //     var newUser=new User({username:req.body.username});
-    //     User.register(newUser,req.body.password,function(err,user){
-    //         if(err){
-    //             console.log(err);
-    //             return res.render("register");
-    //         }
-    //         passport.authenticate("local")(req,res,function(){
-    //             res.redirect("/campgrounds");
-    //         })
-    //     });
-    // });
-    // app.get("/login",function(req,res){
-    //     res.render("login");
-    // });
-    // app.post("/login",passport.authenticate("local",
-    //     {
-    //         successRedirect:"/campgrounds",
-    //         failureRedirect:"/login"
-    //         // failureFlash: true
-    //     })
-    // );
-    // app.get("/logout",function(req,res){
-    //     req.logout();
-    //     res.redirect("/campgrounds");
-    // });
-    // function isLoggedIn(req,res,next){
-    //     if(req.isAuthenticated()){
-    //         return next();
-    //     }
-    //     res.redirect("/login");
-    // }
-
 app.listen(3000,function(){
     console.log("connected");
 });
